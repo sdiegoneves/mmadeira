@@ -1,19 +1,40 @@
 <?php
+require_once("Connection.php");
+
 class EventDal {
-	private $db;
-	private $host;
-	private $password;
 	private $connect;
 
 
 	public function __construct() {
-
+		$this->connect = new Connection();
 	}
 
 	public function insert(array $data) {
-		 $sql = "INSERT INTO event (title, date_event) values ('".$data['title']."', '".$data['date_event']."')";
+		$sql = "INSERT INTO event (title, date_event) values ('".$data['title']."', '".$data['date_event']."');";
 
+		return $this->connect->execInsert($sql);
+	}
 
+	public function getEvents($where = null) {
+		if (empty($where)) {
+			$sql = "SELECT * FROM event;";
+			
+		} else {
+			$sql = "SELECT * FROM event WHERE ";
+
+			$count = 0;
+			foreach ($where as $k=>$v) {
+				$attr .= $k."='".$v."'";
+
+				if (count($where) < $count) $attr.=" AND ";
+
+				$count++;
+			}
+
+			$sql .= $attr;
+		}	
+
+		return $this->connect->execSelect($sql);
 	}
 
 }

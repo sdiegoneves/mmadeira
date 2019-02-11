@@ -1,7 +1,10 @@
 <?php
+require_once("../Dal/EventDal.php");
 class EventModel {
-	public function getEvents() {
+	private $dal;
 
+	public function __construct() {
+		$this->dal = new EventDal();
 	}
 
 	public function insertEvent($event) {
@@ -10,6 +13,11 @@ class EventModel {
 			return false;
 		}
 
+		return $this->dal->insert($event);
+	}
+
+	public function getEvents($where = null) {
+		return $this->dal->getEvents($where);
 	}
 
 	public function updateEvent($id, $event) {
