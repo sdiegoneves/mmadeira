@@ -1,5 +1,5 @@
 <?php
-require_once("../Dal/EventDal.php");
+require_once("../dal/EventDal.php");
 class EventModel {
 	private $dal;
 
@@ -21,9 +21,11 @@ class EventModel {
 	}
 
 	public function updateEvent($id, $event) {
-		if (!is_numeric($id) || empty($id)) {
+		if (!is_numeric($id) || empty($id) || empty($event)) {
 			return false;
 		}
+
+		return $this->dal->updateEvent($id, $event);	
 
 	}
 

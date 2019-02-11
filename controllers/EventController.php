@@ -1,11 +1,23 @@
 <?php
+require_once("../model/EventModel.php");
+
 class EventController {
 
-	public function getEvents() {
+	private $eventModel;
 
+	public function __construct() {
+		$this->eventModel = new EventModel();
 	}
 
-	public function insertEvent($event) {
+
+	public function getEvents() {
+		$events = $this->eventModel->getEvents();
+		
+		return json_decode($events);
+	}
+
+	public function insertEvent() {
+		$event = $_POST;
 
 		if (empty($event)) {
 			return false;
@@ -24,7 +36,6 @@ class EventController {
 		if (!is_numeric($id) || empty($id)) {
 			return false;
 		}
-
 		
 	}
 }
