@@ -23,6 +23,7 @@ class EventController {
 			return false;
 		}
 
+		
 	}
 
 	public function updateEvent($id, $event) {
