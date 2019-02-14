@@ -11,7 +11,15 @@ class EventController {
 
 
 	public function getEvents() {
-		$events = $this->eventModel->getEvents();
+		$id = $_GET['idEvent'];
+
+		if (!empty($id)) {
+			$events = $this->eventModel->getEvents(array('id' => $id));
+
+		} else {
+			$events = $this->eventModel->getEvents();
+		}
+	
 		
 		return json_decode($events);
 	}
@@ -23,13 +31,14 @@ class EventController {
 			return false;
 		}
 
-		
 	}
 
 	public function updateEvent($id, $event) {
 		if (!is_numeric($id) || empty($id)) {
 			return false;
 		}
+
+		return $this->eventModel->($id, $event);
 
 	}
 

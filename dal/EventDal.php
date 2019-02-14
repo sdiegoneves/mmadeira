@@ -53,7 +53,7 @@ class EventDal {
 	}
 
 	public function deleteEvent($id) {
-		$sql = "DELETE event WHERE id=".$id;
+		$sql = "DELETE FROM event WHERE id=".$id;
 		return $this->connect->execQuery($sql);		
 	}
 

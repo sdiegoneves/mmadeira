@@ -34,6 +34,7 @@ class EventModel {
 			return false;
 		}
 
+		return $this->dal->deleteEvent($id);	
 		
 	}
 
